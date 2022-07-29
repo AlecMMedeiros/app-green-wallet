@@ -14,6 +14,11 @@ export const saveData = (payload) => ({
   payload,
 });
 
+export const DeleteData = (payload) => ({
+  type: 'DELETE_DATA',
+  payload,
+});
+
 export const getCurrenciesNamesThunk = () => async (dispatch) => {
   const response = await getCurrencies();
   const currenciesNames = Object.keys(response).filter((ele) => ele !== 'USDT');

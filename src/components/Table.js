@@ -2,6 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
+import { DeleteData } from '../redux/actions';
+
 class Table extends React.Component {
   renderCurrencyName = (ele) => {
     const { currency, exchangeRates } = ele;
@@ -23,6 +25,16 @@ class Table extends React.Component {
       .find((elem) => elem.code === currency);
     const convertedValue = rateBase.ask * value;
     return (<td>{ convertedValue.toFixed(2) }</td>);
+  }
+
+  handleDelete = ({ target }) => {
+    const { value } = target;
+    const { currenciesData: { expenses } } = this.props;
+    const rateBase = Object.values(expenses)
+      .find((elem) => elem === value);
+    const { Delete } = this.props;
+    console.log(rateBase);
+    Delete(value);
   }
 
   render() {
@@ -52,7 +64,15 @@ class Table extends React.Component {
               { this.renderCurrencyName(ele) }
               { this.renderCurrencyRate(ele) }
               {this.renderConvertedValue(ele)}
-              <td>{ ele.conversion }</td>
+              <td>Real</td>
+              <button
+                data-testid="delete-btn"
+                type="button"
+                value={ ele.id }
+                onClick={ this.handleDelete }
+              >
+                Excluir
+              </button>
             </tr>
           ))}
         </tbody>
@@ -64,8 +84,13 @@ const mapStateToProps = (state) => ({
   currenciesData: state.wallet,
 });
 
+const mapDispatchToProps = (dispatch) => ({
+  Delete: (payload) => dispatch(DeleteData(payload)),
+});
+
 Table.propTypes = {
   currenciesData: PropTypes.objectOf(PropTypes.string).isRequired,
+  Delete: PropTypes.func.isRequired,
 };
 
-export default connect(mapStateToProps)(Table);
+export default connect(mapStateToProps, mapDispatchToProps)(Table);
