@@ -68,11 +68,22 @@ class Table extends React.Component {
                 <button
                   data-testid="delete-btn"
                   type="button"
+                  name="deleteButton"
                   value={ ele.id }
                   onClick={ this.handleDelete }
                 >
                   Excluir
                 </button>
+                <button
+                  data-testid="edit-btn"
+                  type="button"
+                  name="editButton"
+                  value={ ele.id }
+                  onClick="edit"
+                >
+                  Editar
+                </button>
+
               </td>
             </tr>
           ))}

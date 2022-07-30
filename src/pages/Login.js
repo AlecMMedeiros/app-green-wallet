@@ -72,6 +72,7 @@ class Login extends React.Component {
         { this.validateFields()}
         <button
           type="button"
+          data-testid="login-btn"
           value="Entrar"
           onClick={ this.handleSubmit }
           disabled={ isDisable }
