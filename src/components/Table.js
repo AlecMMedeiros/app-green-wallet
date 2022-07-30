@@ -31,10 +31,9 @@ class Table extends React.Component {
     const { value } = target;
     const { currenciesData: { expenses } } = this.props;
     const rateBase = Object.values(expenses)
-      .find((elem) => elem === value);
+      .filter((elem) => elem.id !== Number(value));
     const { Delete } = this.props;
-    console.log(rateBase);
-    Delete(value);
+    Delete(rateBase);
   }
 
   render() {
@@ -65,14 +64,16 @@ class Table extends React.Component {
               { this.renderCurrencyRate(ele) }
               {this.renderConvertedValue(ele)}
               <td>Real</td>
-              <button
-                data-testid="delete-btn"
-                type="button"
-                value={ ele.id }
-                onClick={ this.handleDelete }
-              >
-                Excluir
-              </button>
+              <td>
+                <button
+                  data-testid="delete-btn"
+                  type="button"
+                  value={ ele.id }
+                  onClick={ this.handleDelete }
+                >
+                  Excluir
+                </button>
+              </td>
             </tr>
           ))}
         </tbody>
