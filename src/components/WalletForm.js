@@ -124,6 +124,7 @@ class WalletForm extends React.Component {
           </label>
           <button
             type="button"
+            data-testid="save-btn"
             name="AddExpense"
             value="Adicionar despesa"
             onClick={ this.handleSubmit }
