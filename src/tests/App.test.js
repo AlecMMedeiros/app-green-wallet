@@ -28,18 +28,22 @@ describe('Página de Login', () => {
 
         const userInputPass = screen.getByTestId('password-input');
         userEvent.type(userInputPass, '123456789');
-
         const userInputEmail = screen.getByTestId('email-input');
         userEvent.type(userInputEmail, 'some');
 
+        expect(userInputPass.value).toHaveLength(9);
         expect(loginButton).toBeDisabled();
         
-        userEvent.type(userInputEmail, 'some@some.com');
-
-        expect(loginButton).not.toBeDisabled();        
+        userEvent.type(userInputEmail, 'some@some.com');       
+        expect(loginButton).not.toBeDisabled();       
       
         userEvent.type(userInputPass, '12345');
+        expect(userInputPass.value).toHaveLength(5);
         expect(loginButton).toBeDisabled();
+
+        userEvent.type(userInputPass, '123456');
+        expect(userInputPass.value).toHaveLength(6);
+        expect(loginButton).not.toBeDisabled();
     
     })
     it('verifica se é verificado o formato padrão de passwod:', () => {
@@ -118,7 +122,9 @@ describe('Testa o componente Wallet ', () => {
 
       
         expect(screen.getByText(/teste@teste.com/i)).toBeInTheDocument();
-        expect(screen.getByTestId('tag-input')).toBeInTheDocument();       
+        expect(screen.getByTestId('tag-input')).toBeInTheDocument(); 
+        expect(screen.getByTestId('total-field')).toHaveTextContent('5.62');
+        expect(screen.getByTestId('rate-value')).toBeInTheDocument();
         expect(screen.getByText(/Descrição/i)).toBeInTheDocument();
         expect(screen.getByText(/Tag/i)).toBeInTheDocument();
         expect(screen.getByText(/Id: 0/i)).toBeInTheDocument();    
@@ -130,6 +136,7 @@ describe('Testa o componente Wallet ', () => {
         const deleteButton = screen.getByTestId('delete-btn');   
         userEvent.click(deleteButton)
         expect(deleteButton).not.toBeInTheDocument();
+        expect(screen.getByTestId('total-field')).toHaveTextContent('0.00');
     });
     it('Testa a funcionalidade de adicionar despesa:', async () => {
         const initialStateMock = {

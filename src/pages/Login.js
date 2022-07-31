@@ -50,36 +50,40 @@ class Login extends React.Component {
   render() {
     const { email, password, isDisable } = this.state;
     return (
-      <fieldset>
-        <input
-          className="Login-Form"
-          data-testid="email-input"
-          name="email"
-          value={ email }
-          type="email"
-          placeholder="e-mail"
-          onChange={ this.handleChange }
-        />
-        <input
-          className="Login-Form"
-          data-testid="password-input"
-          name="password"
-          value={ password }
-          type="password"
-          placeholder="password"
-          onChange={ this.handleChange }
-        />
-        { this.validateFields()}
-        <button
-          type="button"
-          data-testid="login-btn"
-          value="Entrar"
-          onClick={ this.handleSubmit }
-          disabled={ isDisable }
-        >
-          Entrar
-        </button>
-      </fieldset>
+      <form>
+        <fieldset>
+          <input
+            className="Login-Form"
+            data-testid="email-input"
+            autoComplete="username"
+            name="email"
+            value={ email }
+            type="email"
+            placeholder="e-mail"
+            onChange={ this.handleChange }
+          />
+          <input
+            className="Login-Form"
+            data-testid="password-input"
+            name="password"
+            autoComplete="current-password"
+            value={ password }
+            type="password"
+            placeholder="password"
+            onChange={ this.handleChange }
+          />
+          { this.validateFields()}
+          <button
+            type="button"
+            data-testid="login-btn"
+            value="Entrar"
+            onClick={ this.handleSubmit }
+            disabled={ isDisable }
+          >
+            Entrar
+          </button>
+        </fieldset>
+      </form>
     );
   }
 }

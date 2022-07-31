@@ -19,13 +19,13 @@ class Table extends React.Component {
       return (<td>{ rateBase.name }</td>);
     }
     if (property === 'rate') {
-      return (<td>{ Number(rateBase.ask).toFixed(2) }</td>);
+      return (<td data-testid="rate-value">{ Number(rateBase.ask).toFixed(2) }</td>);
     }
   }
 
   handleDelete = ({ target }) => {
     const { value } = target;
-    const { currenciesData: { expenses } } = this.props;
+    const { expenses } = this.props;
     const rateBase = Object.values(expenses)
       .filter((elem) => elem.id !== Number(value));
     const { Delete } = this.props;
@@ -34,7 +34,7 @@ class Table extends React.Component {
 
   handleEdit = ({ target }) => {
     const { value } = target;
-    const { currenciesData: { expenses } } = this.props;
+    const { expenses } = this.props;
     const getToBeEdited = Object.values(expenses)
       .filter((elem) => elem.id === Number(value));
     const { Edit } = this.props;
@@ -42,9 +42,9 @@ class Table extends React.Component {
   }
 
   render() {
-    const { currenciesData: { expenses } } = this.props;
+    const { expenses } = this.props;
     return (
-      <>
+      <table>
         <thead>
           <tr>
             <th>Descrição</th>
@@ -93,12 +93,12 @@ class Table extends React.Component {
             </tr>
           ))}
         </tbody>
-      </>
+      </table>
     );
   }
 }
 const mapStateToProps = (state) => ({
-  currenciesData: state.wallet,
+  expenses: state.wallet.expenses,
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -107,7 +107,7 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 Table.propTypes = {
-  currenciesData: propTypes.objectOf(propTypes.string).isRequired,
+  expenses: propTypes.arrayOf(propTypes.object.isRequired).isRequired,
   Delete: propTypes.func.isRequired,
   Edit: propTypes.func.isRequired,
 };

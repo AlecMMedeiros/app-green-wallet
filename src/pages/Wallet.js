@@ -10,7 +10,7 @@ import Table from '../components/Table';
 
 class Wallet extends React.Component {
   render() {
-    const { currenciesData: { editor } } = this.props;
+    const { editor } = this.props;
     return (
       <>
         <Header />
@@ -22,12 +22,11 @@ class Wallet extends React.Component {
 }
 
 const mapStateToProps = (state) => ({
-  currenciesData: state.wallet,
+  editor: state.wallet.editor,
 });
 
 Wallet.propTypes = {
-  editor: propTypes.objectOf(propTypes.object.isRequired).isRequired,
-  currenciesData: propTypes.objectOf(propTypes.string).isRequired,
+  editor: propTypes.bool.isRequired,
 };
 
 export default connect(mapStateToProps)(Wallet);

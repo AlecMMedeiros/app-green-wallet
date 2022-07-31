@@ -2,7 +2,7 @@ import React from 'react';
 import propTypes from 'prop-types';
 import { connect } from 'react-redux';
 
-import { getCurrenciesNamesThunk, AlterData, DeleteData } from '../redux/actions';
+import { AlterData, DeleteData } from '../redux/actions';
 
 class WalletFormEdit extends React.Component {
   constructor() {
@@ -141,7 +141,6 @@ class WalletFormEdit extends React.Component {
 }
 
 const mapDispatchToProps = (dispatch) => ({
-  getCurrenciesNames: () => dispatch(getCurrenciesNamesThunk()),
   Change: (payload) => dispatch(AlterData(payload)),
   Delete: (payload) => dispatch(DeleteData(payload)),
 });
