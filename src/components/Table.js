@@ -1,30 +1,26 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+import propTypes from 'prop-types';
 import { connect } from 'react-redux';
 
-import { DeleteData } from '../redux/actions';
+import { DeleteData, EditData } from '../redux/actions';
 
 class Table extends React.Component {
-  renderCurrencyName = (ele) => {
-    const { currency, exchangeRates } = ele;
-    const currencyName = Object.values(exchangeRates)
-      .find((element) => element.code === currency);
-    return (<td>{ currencyName.name }</td>);
-  }
+  renderOrderedIds = (a, b) => a.id - b.id;
 
-  renderCurrencyRate = (ele) => {
-    const { currency, exchangeRates } = ele;
-    const rateBase = Object.values(exchangeRates)
-      .find((elem) => elem.code === currency);
-    return (<td>{ Number(rateBase.ask).toFixed(2) }</td>);
-  }
-
-  renderConvertedValue = (ele) => {
+  renderGeneralProperties = (ele, property) => {
     const { currency, exchangeRates, value } = ele;
     const rateBase = Object.values(exchangeRates)
       .find((elem) => elem.code === currency);
-    const convertedValue = rateBase.ask * value;
-    return (<td>{ convertedValue.toFixed(2) }</td>);
+    if (property === 'conversion') {
+      const convertedValue = rateBase.ask * value;
+      return (<td>{ convertedValue.toFixed(2) }</td>);
+    }
+    if (property === 'name') {
+      return (<td>{ rateBase.name }</td>);
+    }
+    if (property === 'rate') {
+      return (<td>{ Number(rateBase.ask).toFixed(2) }</td>);
+    }
   }
 
   handleDelete = ({ target }) => {
@@ -34,6 +30,15 @@ class Table extends React.Component {
       .filter((elem) => elem.id !== Number(value));
     const { Delete } = this.props;
     Delete(rateBase);
+  }
+
+  handleEdit = ({ target }) => {
+    const { value } = target;
+    const { currenciesData: { expenses } } = this.props;
+    const getToBeEdited = Object.values(expenses)
+      .filter((elem) => elem.id === Number(value));
+    const { Edit } = this.props;
+    Edit(getToBeEdited);
   }
 
   render() {
@@ -54,15 +59,15 @@ class Table extends React.Component {
           </tr>
         </thead>
         <tbody>
-          {expenses.map((ele) => (
+          {expenses.sort(this.renderOrderedIds).map((ele) => (
             <tr key={ ele.id }>
               <td>{ ele.description }</td>
               <td>{ ele.tag }</td>
               <td>{ ele.method }</td>
               <td>{ Number(ele.value).toFixed(2) }</td>
-              { this.renderCurrencyName(ele) }
-              { this.renderCurrencyRate(ele) }
-              {this.renderConvertedValue(ele)}
+              { this.renderGeneralProperties(ele, 'name') }
+              { this.renderGeneralProperties(ele, 'rate') }
+              {this.renderGeneralProperties(ele, 'conversion')}
               <td>Real</td>
               <td>
                 <button
@@ -79,7 +84,7 @@ class Table extends React.Component {
                   type="button"
                   name="editButton"
                   value={ ele.id }
-                  onClick="edit"
+                  onClick={ this.handleEdit }
                 >
                   Editar
                 </button>
@@ -98,11 +103,13 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   Delete: (payload) => dispatch(DeleteData(payload)),
+  Edit: (payload) => dispatch(EditData(payload)),
 });
 
 Table.propTypes = {
-  currenciesData: PropTypes.objectOf(PropTypes.string).isRequired,
-  Delete: PropTypes.func.isRequired,
+  currenciesData: propTypes.objectOf(propTypes.string).isRequired,
+  Delete: propTypes.func.isRequired,
+  Edit: propTypes.func.isRequired,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Table);

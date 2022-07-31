@@ -106,7 +106,8 @@ describe('Testa o componente Wallet ', () => {
                         ask: "5.6208",                 
                     },                
                     }
-                }]
+                }],
+                editor: false,
             }
         };
         const store = createStore(rootReducer, initialStateMock);
@@ -117,20 +118,12 @@ describe('Testa o componente Wallet ', () => {
 
       
         expect(screen.getByText(/teste@teste.com/i)).toBeInTheDocument();
-        expect(screen.getByTestId('tag-input')).toBeInTheDocument();
-        expect(screen.getByTestId('method-input')).toBeInTheDocument();
-        expect(screen.getByTestId('currency-input')).toBeInTheDocument();
-        expect(screen.getByTestId('description-input')).toBeInTheDocument();
-        expect(screen.getByTestId('value-input')).toBeInTheDocument();   
-        expect(screen.getByTestId('email-field')).toBeInTheDocument();
-        expect(screen.getByTestId('total-field')).toBeInTheDocument();
-        expect(screen.getByTestId('header-currency-field')).toBeInTheDocument();
+        expect(screen.getByTestId('tag-input')).toBeInTheDocument();       
         expect(screen.getByText(/Descrição/i)).toBeInTheDocument();
         expect(screen.getByText(/Tag/i)).toBeInTheDocument();
-        expect(screen.getByText(/Valor convertido/i)).toBeInTheDocument();
         expect(screen.getByText(/Id: 0/i)).toBeInTheDocument();    
         expect(screen.getByText(/BRL/i)).toBeInTheDocument();
-        expect(screen.getByText(/Cartão de crédito/i)).toBeInTheDocument();
+
         const input = screen.getByLabelText('Moeda:');
         expect(input).toHaveTextContent('USD');
 
@@ -138,7 +131,7 @@ describe('Testa o componente Wallet ', () => {
         userEvent.click(deleteButton)
         expect(deleteButton).not.toBeInTheDocument();
     });
-    it('Testa a funcionalidade de adcionar despesa:', async () => {
+    it('Testa a funcionalidade de adicionar despesa:', async () => {
         const initialStateMock = {
             user: {
                 email: 'teste@teste.com',
@@ -160,7 +153,8 @@ describe('Testa o componente Wallet ', () => {
                         ask: "5.6208",                 
                     },                
                     }
-                }]
+                }],
+                editor: false,
             }
         };
         const store = createStore(rootReducer, initialStateMock);
@@ -178,9 +172,56 @@ describe('Testa o componente Wallet ', () => {
         const saveButton = screen.getByTestId('save-btn');       
         userEvent.click(saveButton);
       
-        expect(await screen.findByText(/11.00/i)).toBeInTheDocument();
+        expect(await screen.findByText(/RTX 3090/i)).toBeInTheDocument();
 
-    }); 
+    });
+    it('Testa a funcionalidade de editar despesa:', async () => {
+        const initialStateMock = {
+            user: {
+                email: 'teste@teste.com',
+                password: '1234567',
+            },
+            wallet:{
+                currencies: ['USD', 'CAD', 'GBP'],
+                expenses: [{
+                    id: 0,
+                    value: 3,
+                    description: "Hot Dog",
+                    currency: "USD",
+                    method: "Dinheiro",
+                    tag: "Alimentação",
+                    exchangeRates: {
+                    USD: {
+                        code: "USD",
+                        name: "Dólar Comercial",
+                        ask: "5.6208",                 
+                    },                
+                    }
+                }],
+                editor: false,
+            }
+        };
+        const store = createStore(rootReducer, initialStateMock);
+        renderWithRouterAndRedux(<Wallet />,
+        {
+          initialState: initialStateMock,
+         })        
+         
+         const EditButton = screen.getByTestId('edit-btn');       
+         userEvent.click(EditButton);
+         
+         const userInputValue = screen.getByAltText('value');
+         userEvent.type(userInputValue, '11');
+ 
+         const userInputDescription = screen.getByAltText('description');
+         userEvent.type(userInputDescription, 'RTX 3090');
+
+         const SaveChangeButton = screen.getByTestId('save-btn');      
+         userEvent.click(SaveChangeButton);
+
+        expect(await screen.findByText(/RTX 3090/i)).toBeInTheDocument();
+
+    });
 })
 
 describe('Testa o componente Header ', () => {

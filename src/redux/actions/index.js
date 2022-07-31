@@ -19,6 +19,16 @@ export const DeleteData = (payload) => ({
   payload,
 });
 
+export const EditData = (payload) => ({
+  type: 'EDIT_DATA',
+  payload,
+});
+
+export const AlterData = (payload) => ({
+  type: 'ALTER_DATA',
+  payload,
+});
+
 export const getCurrenciesNamesThunk = () => async (dispatch) => {
   const response = await getCurrencies();
   const currenciesNames = Object.keys(response).filter((ele) => ele !== 'USDT');
