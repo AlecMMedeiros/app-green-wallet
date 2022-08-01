@@ -71,16 +71,6 @@ class Table extends React.Component {
               <td>Real</td>
               <td>
                 <button
-                  data-testid="delete-btn"
-                  type="button"
-                  name="deleteButton"
-                  value={ ele.id }
-                  onClick={ this.handleDelete }
-                  className="btn btn-danger btn-sm"
-                >
-                  Excluir
-                </button>
-                <button
                   data-testid="edit-btn"
                   type="button"
                   name="editButton"
@@ -90,7 +80,16 @@ class Table extends React.Component {
                 >
                   Editar
                 </button>
-
+                <button
+                  data-testid="delete-btn"
+                  type="button"
+                  name="deleteButton"
+                  value={ ele.id }
+                  onClick={ this.handleDelete }
+                  className="btn btn-danger btn-sm"
+                >
+                  Excluir
+                </button>
               </td>
             </tr>
           ))}
