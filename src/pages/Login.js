@@ -22,8 +22,7 @@ class Login extends React.Component {
      const { password } = this.state;
      const checkValidPassword = password.length;
      const passwordMinimumLength = 6;
-     if (checkValidPassword >= passwordMinimumLength) return true;
-     if (checkValidPassword < passwordMinimumLength) return false;
+     return checkValidPassword >= passwordMinimumLength;
    }
 
   validateFields= () => {
@@ -31,7 +30,6 @@ class Login extends React.Component {
     const validEmail = this.validateEmail();
     const validPassword = this.validatePassword();
     const checker = (validEmail * validPassword);
-    if (isDisable === false && checker === 1) return;
     if (isDisable === false && checker === 0) this.setState({ isDisable: true });
     if (checker === 1) this.setState({ isDisable: false });
   }
@@ -44,7 +42,7 @@ class Login extends React.Component {
 
   handleChange = ({ target }) => {
     const { name, value } = target;
-    this.setState({ [name]: value });
+    this.setState({ [name]: value }, () => this.validateFields());
   }
 
   render() {
@@ -73,7 +71,6 @@ class Login extends React.Component {
             placeholder="password"
             onChange={ this.handleChange }
           />
-          { this.validateFields()}
           <button
             type="button"
             className="loginForm btn btn-light"

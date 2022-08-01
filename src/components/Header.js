@@ -17,7 +17,7 @@ class Header extends React.Component {
   }
 
   render() {
-    const { loginData: { email } } = this.props;
+    const { email } = this.props;
     return (
       <header>
         <div className="Logo">
@@ -47,12 +47,12 @@ class Header extends React.Component {
   }
 }
 const mapStateToProps = (state) => ({
-  loginData: state.user,
+  email: state.user.email,
   expenses: state.wallet.expenses,
 });
 
 Header.propTypes = {
-  loginData: PropTypes.objectOf(PropTypes.string.isRequired).isRequired,
+  email: PropTypes.string.isRequired,
   expenses: PropTypes.arrayOf(PropTypes.object.isRequired).isRequired,
 };
 
