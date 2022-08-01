@@ -5,6 +5,62 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: whitesmoke;
+  overflow: hidden;
+}
+
+body::-webkit-scrollbar {
+  display: none; /* for Chrome, Safari, and Opera */
+}
+
+.LoginForm {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 15% auto;
+  width: 500px;
+  height: 300px;
+  text-align: center;
+  background-color: rgb(18, 162, 219);
+  border-radius: 8px;
+}
+
+form input {
+  border-radius: 8px;
+}
+
+::placeholder {
+  font-style: oblique;
+  color: rgb(0, 0, 0);
+}
+
+.loginForm {
+  margin-bottom:10px;
+  width: 400px;
+}
+
+.Wallet {
+  display: flex;
+  flex-direction: column;
+}
+
+.WalletForm {
+  display: flex;
+  justify-content: center;
+  gap: 1%;
+}
+
+.MasterTable {
+  display: flex;
+  flex-direction: column;
+  align-self: center;
+  gap: 1%;
+}
+
+th, td{
+  width: 200px;
+  text-align: center;
+  gap: 1%;
 }
 
 code {

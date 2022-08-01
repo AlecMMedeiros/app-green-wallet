@@ -50,10 +50,10 @@ class Login extends React.Component {
   render() {
     const { email, password, isDisable } = this.state;
     return (
-      <form>
+      <form className="LoginForm">
         <fieldset>
           <input
-            className="Login-Form"
+            className="loginForm placeholder col-10 bg-warning"
             data-testid="email-input"
             autoComplete="username"
             name="email"
@@ -63,7 +63,7 @@ class Login extends React.Component {
             onChange={ this.handleChange }
           />
           <input
-            className="Login-Form"
+            className="loginForm placeholder col-10 bg-warning"
             data-testid="password-input"
             name="password"
             autoComplete="current-password"
@@ -75,6 +75,7 @@ class Login extends React.Component {
           { this.validateFields()}
           <button
             type="button"
+            className="loginForm btn btn-warning"
             data-testid="login-btn"
             value="Entrar"
             onClick={ this.handleSubmit }

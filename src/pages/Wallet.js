@@ -14,8 +14,10 @@ class Wallet extends React.Component {
     return (
       <>
         <Header />
-        { editor === false ? <WalletForm /> : <WalletFormEdit /> }
-        <Table />
+        <div className="Wallet">
+          { editor === false ? <WalletForm /> : <WalletFormEdit /> }
+          <Table />
+        </div>
       </>
     );
   }

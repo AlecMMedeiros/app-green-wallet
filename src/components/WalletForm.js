@@ -51,7 +51,7 @@ class WalletForm extends React.Component {
     const { currencies } = this.props;
     const { id, value, description, currency, method, tag } = this.state;
     return (
-      <form>
+      <form className="WalletForm">
         <p>
           Id:
           {' '}
@@ -64,15 +64,18 @@ class WalletForm extends React.Component {
             name="value"
             value={ value }
             onChange={ this.handleChange }
+            placeholder="Valor"
           />
         </div>
         <div>
           <input
             data-testid="description-input"
             type="text"
+            maxLength="20"
             name="description"
             value={ description }
             onChange={ this.handleChange }
+            placeholder="Descrição da despesa"
           />
         </div>
         <div>
