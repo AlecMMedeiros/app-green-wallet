@@ -76,6 +76,7 @@ class Table extends React.Component {
                   name="deleteButton"
                   value={ ele.id }
                   onClick={ this.handleDelete }
+                  className="btn btn-danger btn-sm"
                 >
                   Excluir
                 </button>
@@ -85,6 +86,7 @@ class Table extends React.Component {
                   name="editButton"
                   value={ ele.id }
                   onClick={ this.handleEdit }
+                  className="btn btn-warning btn-sm"
                 >
                   Editar
                 </button>

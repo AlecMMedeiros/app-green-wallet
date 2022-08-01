@@ -52,8 +52,9 @@ class Login extends React.Component {
     return (
       <form className="LoginForm">
         <fieldset>
+          <p>GreenWallet</p>
           <input
-            className="loginForm placeholder col-10 bg-warning"
+            className="loginForm placeholder col-10 bg-light"
             data-testid="email-input"
             autoComplete="username"
             name="email"
@@ -63,7 +64,7 @@ class Login extends React.Component {
             onChange={ this.handleChange }
           />
           <input
-            className="loginForm placeholder col-10 bg-warning"
+            className="loginForm placeholder col-10 bg-light"
             data-testid="password-input"
             name="password"
             autoComplete="current-password"
@@ -75,7 +76,7 @@ class Login extends React.Component {
           { this.validateFields()}
           <button
             type="button"
-            className="loginForm btn btn-warning"
+            className="loginForm btn btn-light"
             data-testid="login-btn"
             value="Entrar"
             onClick={ this.handleSubmit }

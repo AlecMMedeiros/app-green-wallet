@@ -51,7 +51,7 @@ class WalletFormEdit extends React.Component {
     const { currencies } = this.props;
     const { id, value, description, currency, method, tag } = this.state;
     return (
-      <form>
+      <form className="WalletFormEdit">
         <p>
           Id:
           {' '}
@@ -65,6 +65,7 @@ class WalletFormEdit extends React.Component {
             name="value"
             value={ value }
             onChange={ this.handleChange }
+            placeholder="Valor"
           />
         </div>
         <div>
@@ -75,12 +76,14 @@ class WalletFormEdit extends React.Component {
             name="description"
             value={ description }
             onChange={ this.handleChange }
+            placeholder="Descrição da despesa"
           />
 
         </div>
         <div>
           <label htmlFor="currency">
             Moeda:
+            {' '}
             <select
               data-testid="currency-input"
               name="currency"
@@ -95,6 +98,7 @@ class WalletFormEdit extends React.Component {
         <div>
           <label htmlFor="method">
             Método de pagamento:
+            {' '}
             <select
               data-testid="method-input"
               name="method"
@@ -111,6 +115,7 @@ class WalletFormEdit extends React.Component {
         <div>
           <label htmlFor="categoria">
             Categoria:
+            {' '}
             <select
               data-testid="tag-input"
               name="tag"
@@ -125,8 +130,10 @@ class WalletFormEdit extends React.Component {
               <option value="Saúde">Saúde</option>
             </select>
           </label>
+          {' '}
           <button
             type="button"
+            className="btn btn-warning btn-sm"
             data-testid="save-btn"
             name="AddExpense"
             value="Adicionar despesa"

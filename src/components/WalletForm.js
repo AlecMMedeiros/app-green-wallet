@@ -81,6 +81,7 @@ class WalletForm extends React.Component {
         <div>
           <label htmlFor="currency">
             Moeda:
+            {' '}
             <select
               data-testid="currency-input"
               name="currency"
@@ -95,6 +96,7 @@ class WalletForm extends React.Component {
         <div>
           <label htmlFor="method">
             Método de pagamento:
+            {' '}
             <select
               data-testid="method-input"
               name="method"
@@ -111,6 +113,7 @@ class WalletForm extends React.Component {
         <div>
           <label htmlFor="categoria">
             Categoria:
+            {' '}
             <select
               data-testid="tag-input"
               name="tag"
@@ -125,8 +128,10 @@ class WalletForm extends React.Component {
               <option value="Saúde">Saúde</option>
             </select>
           </label>
+          {' '}
           <button
             type="button"
+            className="btn btn-success btn-sm"
             data-testid="save-btn"
             name="AddExpense"
             value="Adicionar despesa"
