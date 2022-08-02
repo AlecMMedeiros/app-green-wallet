@@ -12,8 +12,7 @@ import Header from '../components/Header';
 import rootReducer from '../redux/reducers';
 import userEvent from '@testing-library/user-event';
 
-describe('Página de Login', () => {
-    let currentLocation;
+describe('Página de Login', () => {   
     it('verifica se tela de login é exibida corretamente', () => {
         renderWithRouterAndRedux(<App />)
 
@@ -46,7 +45,7 @@ describe('Página de Login', () => {
         expect(loginButton).not.toBeDisabled();
     
     })
-    it('verifica se é verificado o formato padrão de passwod:', () => {
+    it('verifica se é verificado o formato padrão de password:', () => {
         renderWithRouterAndRedux(<App />)
 
         const userInputEmail = screen.getByTestId('email-input');
@@ -88,7 +87,7 @@ describe('Página de Login', () => {
 })
 
 describe('Testa o componente Wallet ', () => {
-    it('Testa a exição dos objectos do compomente Wallet', () => {
+    it('Testa a exibição dos objetos do compomente Wallet', () => {
         const initialStateMock = {
             user: {
                 email: 'teste@teste.com',
@@ -120,11 +119,12 @@ describe('Testa o componente Wallet ', () => {
           initialState: initialStateMock,
          })
 
-      
+        const rateValue = screen.getByTestId('rate-value');
+
         expect(screen.getByText(/teste@teste.com/i)).toBeInTheDocument();
         expect(screen.getByTestId('tag-input')).toBeInTheDocument(); 
         expect(screen.getByTestId('total-field')).toHaveTextContent('5.62');
-        expect(screen.getByTestId('rate-value')).toBeInTheDocument();
+        expect(rateValue).toBeInTheDocument();
         expect(screen.getByText(/Descrição/i)).toBeInTheDocument();
         expect(screen.getByText(/Tag/i)).toBeInTheDocument();
         expect(screen.getByText(/Id: 0/i)).toBeInTheDocument();    
@@ -133,10 +133,12 @@ describe('Testa o componente Wallet ', () => {
         const input = screen.getByLabelText('Moeda:');
         expect(input).toHaveTextContent('USD');
 
-        const deleteButton = screen.getByTestId('delete-btn');   
+        const deleteButton = screen.getByTestId('delete-btn');
+
         userEvent.click(deleteButton)
         expect(deleteButton).not.toBeInTheDocument();
         expect(screen.getByTestId('total-field')).toHaveTextContent('0.00');
+        expect(rateValue).not.toBeInTheDocument();
     });
     it('Testa a funcionalidade de adicionar despesa:', async () => {
         const initialStateMock = {
@@ -232,7 +234,7 @@ describe('Testa o componente Wallet ', () => {
 })
 
 describe('Testa o componente Header ', () => {
-    it('Testa a exição dos objectos do compomente Wallet', () => {
+    it('Testa a exição dos objetos do compomente Wallet', () => {
         const initialStateMock = {
             user: {
                 email: 'teste@teste.com',

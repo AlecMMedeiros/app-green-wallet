@@ -38,7 +38,7 @@ class WalletFormEdit extends React.Component {
   }
 
   handleSubmit = async () => {
-    const { currenciesData: { expenses }, toBeEdited } = this.props;
+    const { expenses, toBeEdited } = this.props;
     const rateBase = Object.values(expenses)
       .filter((elem) => elem.id !== Number(toBeEdited[0].id));
     const { Delete } = this.props;
@@ -155,15 +155,15 @@ const mapDispatchToProps = (dispatch) => ({
 const mapStateToProps = (state) => ({
   toBeEdited: state.wallet.toBeEdited,
   currencies: state.wallet.currencies,
-  currenciesData: state.wallet,
+  expenses: state.wallet.expenses,
 });
 
 WalletFormEdit.propTypes = {
   Change: propTypes.func.isRequired,
   Delete: propTypes.func.isRequired,
-  toBeEdited: propTypes.objectOf(propTypes.object.isRequired).isRequired,
-  currencies: propTypes.objectOf(propTypes.string.isRequired).isRequired,
-  currenciesData: propTypes.objectOf(propTypes.string.isRequired).isRequired,
+  toBeEdited: propTypes.arrayOf(propTypes.object.isRequired).isRequired,
+  currencies: propTypes.arrayOf(propTypes.string.isRequired).isRequired,
+  expenses: propTypes.arrayOf(propTypes.object.isRequired).isRequired,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(WalletFormEdit);
