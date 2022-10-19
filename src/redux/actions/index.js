@@ -29,11 +29,6 @@ export const AlterData = (payload) => ({
   payload,
 });
 
-export const setActualId = (payload) => ({
-  type: 'SET_ID',
-  payload,
-});
-
 export const getCurrenciesNamesThunk = () => async (dispatch) => {
   const response = await getCurrencies();
   const currenciesNames = Object.keys(response).filter((ele) => ele !== 'USDT');

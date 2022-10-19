@@ -1,7 +1,6 @@
 const INITIAL_STATE = {
   currencies: [],
   expenses: [],
-  actualId: 0,
   editor: false, // valor booleano que indica de uma despesa está sendo editada
   idToEdit: 0, // valor numérico que armazena o id da despesa que esta sendo editada
 };
@@ -36,11 +35,6 @@ const walletReducer = (state = INITIAL_STATE, action) => {
       expenses: [...state.expenses, action.payload],
       editor: false,
       toBeEdited: 0,
-    };
-  case 'SET_ID':
-    return {
-      ...state,
-      actualId: action.payload,
     };
   default:
     return state;
