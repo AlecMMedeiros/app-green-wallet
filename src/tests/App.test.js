@@ -1,8 +1,5 @@
 import React from 'react';
-import { render, screen } from '@testing-library/react';
-import { MemoryRouter, Router, Route } from 'react-router-dom';
-import { createMemoryHistory } from 'history';
-import { Provider } from 'react-redux';
+import {  screen } from '@testing-library/react';
 import { createStore } from 'redux';
 import { renderWithRouterAndRedux } from './helpers/renderWith';
 
