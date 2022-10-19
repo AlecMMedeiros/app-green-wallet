@@ -3,7 +3,7 @@ import propTypes from 'prop-types';
 import { connect } from 'react-redux';
 import getCurrencies from '../services/currencyAPI';
 
-import { getCurrenciesNamesThunk, saveData } from '../redux/actions';
+import { getCurrenciesNamesThunk, saveData, setActualId } from '../redux/actions';
 
 class WalletForm extends React.Component {
   constructor() {
@@ -21,8 +21,9 @@ class WalletForm extends React.Component {
   }
 
   componentDidMount() {
-    const { getCurrenciesNames } = this.props;
+    const { getCurrenciesNames, actualId } = this.props;
     getCurrenciesNames();
+    this.setState({ id: actualId + 1 });
   }
 
   handleChange= ({ target }) => {
@@ -31,7 +32,7 @@ class WalletForm extends React.Component {
   }
 
   handleSubmit = async () => {
-    const { sendSaveData } = this.props;
+    const { sendSaveData, saveActualId } = this.props;
     const { id } = this.state;
     const getExchangeRates = await getCurrencies();
     delete getExchangeRates.USDT;
@@ -45,6 +46,7 @@ class WalletForm extends React.Component {
         description: '',
       },
     );
+    saveActualId(id);
   }
 
   render() {
@@ -148,15 +150,19 @@ class WalletForm extends React.Component {
 const mapDispatchToProps = (dispatch) => ({
   getCurrenciesNames: () => dispatch(getCurrenciesNamesThunk()),
   sendSaveData: (payload) => dispatch(saveData(payload)),
+  saveActualId: (payload) => dispatch(setActualId(payload)),
 });
 
 const mapStateToProps = (state) => ({
   currencies: state.wallet.currencies,
+  actualId: state.wallet.actualId,
 });
 
 WalletForm.propTypes = {
   getCurrenciesNames: propTypes.func.isRequired,
   sendSaveData: propTypes.func.isRequired,
+  saveActualId: propTypes.func.isRequired,
+  actualId: propTypes.number.isRequired,
   currencies: propTypes.arrayOf(propTypes.string.isRequired).isRequired,
 };
 
