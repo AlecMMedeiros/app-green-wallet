@@ -93,7 +93,7 @@ describe('Testa o componente Wallet ', () => {
             wallet:{
                 currencies: ['USD', 'CAD', 'GBP'],
                 expenses: [{
-                    id: 0,
+                    id: 1,
                     value: 1,
                     description: "Hot Dog",
                     currency: "USD",
@@ -124,7 +124,7 @@ describe('Testa o componente Wallet ', () => {
         expect(rateValue).toBeInTheDocument();
         expect(screen.getByText(/Descrição/i)).toBeInTheDocument();
         expect(screen.getByText(/Tag/i)).toBeInTheDocument();
-        expect(screen.getByText(/Id: 0/i)).toBeInTheDocument();    
+        expect(screen.getByText(/Id: 1/i)).toBeInTheDocument();    
         expect(screen.getByText(/BRL/i)).toBeInTheDocument();
 
         const input = screen.getByLabelText('Moeda:');

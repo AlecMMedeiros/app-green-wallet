@@ -162,8 +162,12 @@ WalletForm.propTypes = {
   getCurrenciesNames: propTypes.func.isRequired,
   sendSaveData: propTypes.func.isRequired,
   saveActualId: propTypes.func.isRequired,
-  actualId: propTypes.number.isRequired,
+  actualId: propTypes.number,
   currencies: propTypes.arrayOf(propTypes.string.isRequired).isRequired,
+};
+
+WalletForm.defaultProps = {
+  actualId: 0,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(WalletForm);
