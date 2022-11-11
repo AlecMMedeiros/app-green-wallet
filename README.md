@@ -2,6 +2,8 @@
 
 This is a small Reactjs project developed during my time as a web development student.
 
+You can check this project running at: https://app-green-wallet-production.up.railway.app/
+
 Features in this app:
 
 * Login screen : You can use any simulated data to test,
@@ -9,6 +11,7 @@ Features in this app:
 * List of expenses: Shows all registered expenses ordered by id. Also you can 'delete' or 'edit' the expenses.
 
 This app uses "'https://economia.awesomeapi.com.br" to get the actual currencies values.
+
 
 # Skills #
 
