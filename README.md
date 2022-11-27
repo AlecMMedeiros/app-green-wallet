@@ -31,4 +31,4 @@ This app uses "'https://economia.awesomeapi.com.br" to get the actual currencies
 
 # Special thanks #
 
-Special thanks to all the Tryber staff for their support in my journey toward my career as a Full Stack developer.
+Special thanks to all the Trybe staff for their support in my journey toward my career as a Full Stack developer.
